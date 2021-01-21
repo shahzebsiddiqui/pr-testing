@@ -1,15 +1,24 @@
 always-run:
   tags: ["runner:shell"]
-  script: echo 'this should always run'
+  script: 
+    - echo 'this should always run'
+    - echo $CI_PIPELINE_SOURCE
+    - env | grep CI_
 
 on-pull-requests:
   tags: ["runner:shell"]
-  script: echo 'this should run on pull requests'
+  script: 
+    - echo 'this should run on pull requests'
+    - echo $CI_PIPELINE_SOURCE
+    - env | grep CI_
   only:
     - external_pull_requests
 
 except-pull-requests:
   tags: ["runner:shell"]
-  script: echo 'this should not run on pull requests'
+  script: 
+    - echo 'this should run on pull requests'
+    - echo $CI_PIPELINE_SOURCE
+    - env | grep CI_
   except:
     - external_pull_requests
